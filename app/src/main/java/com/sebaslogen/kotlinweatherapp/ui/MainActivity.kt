@@ -1,10 +1,10 @@
-package com.sebaslogen.kotlinweatherapp
+package com.sebaslogen.kotlinweatherapp.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sebaslogen.kotlinweatherapp.R
 import org.jetbrains.anko.find
 
 class MainActivity : AppCompatActivity() {

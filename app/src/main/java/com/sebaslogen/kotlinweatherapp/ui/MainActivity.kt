@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
+import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,12 @@ class MainActivity : AppCompatActivity() {
         }, {
             val result = RequestForecastCommand("94043").execute()
             runOnUiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result,
+                        object : ForecastListAdapter.OnItemClickListener {
+                            override fun invoke(forecast: Forecast) {
+                                toast(forecast.date)
+                            }
+                        })
             }
         })
     }

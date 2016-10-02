@@ -9,7 +9,7 @@
     android:padding="@dimen/spacing_xlarge">
 
     <ImageView
-        android:id="@+id/weather_icon"
+        android:id="@+id/weatherIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         tools:src="@mipmap/ic_launcher" />

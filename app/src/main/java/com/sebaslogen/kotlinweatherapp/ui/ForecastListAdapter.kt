@@ -13,8 +13,8 @@ import com.sebaslogen.kotlinweatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
-class ForecastListAdapter(val items: ForecastList,
-                          val itemClick: (Forecast) -> Unit) :
+class ForecastListAdapter(private val items: ForecastList,
+                          private val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,9 +26,9 @@ class ForecastListAdapter(val items: ForecastList,
         holder.bindForecast(items[position])
     }
 
-    override fun getItemCount(): Int = items.size()
+    override fun getItemCount() = items.size()
 
-    class ViewHolder(view: View, val itemClick: (Forecast) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val itemClick: (Forecast) -> Unit) : RecyclerView.ViewHolder(view) {
 
         private val iconView: ImageView
         private val dateView: TextView

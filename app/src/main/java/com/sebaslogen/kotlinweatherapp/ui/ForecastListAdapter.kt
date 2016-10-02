@@ -45,7 +45,7 @@ class ForecastListAdapter(val items: ForecastList,
         }
 
         fun bindForecast(forecast: Forecast) {
-            with(forecast) {
+            with(forecast) { // Analog to forecast.apply {  }
                 Picasso.with(itemView.ctx).load(iconUrl).into(iconView)
                 dateView.text = date
                 descriptionView.text = description

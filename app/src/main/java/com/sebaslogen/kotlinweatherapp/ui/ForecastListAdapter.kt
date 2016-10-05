@@ -10,6 +10,8 @@ import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 import com.sebaslogen.kotlinweatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import java.text.DateFormat
+import java.util.*
 
 class ForecastListAdapter(private val items: ForecastList,
                           private val itemClick: (Forecast) -> Unit) :
@@ -31,12 +33,17 @@ class ForecastListAdapter(private val items: ForecastList,
         fun bindForecast(forecast: Forecast) {
             with(forecast) { // Analog to forecast.apply {  }
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.weatherIcon)
-                itemView.date.text = date
+                itemView.date.text = convertDate(date)
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
+        }
+
+        private fun convertDate(date: Long): String {
+            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+            return df.format(date)
         }
     }
 }

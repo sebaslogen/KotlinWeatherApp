@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         doAsync({
             Log.e(javaClass.simpleName, "Error loading Forecast list")
         }, {
-            val result = RequestForecastCommand("94043").execute()
+            val result = RequestForecastCommand(94043).execute()
             runOnUiThread {
-                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
+                forecastList.adapter = ForecastListAdapter(result) { toast(it.description) }
             }
         })
     }

@@ -2,7 +2,7 @@ package com.sebaslogen.kotlinweatherapp.data.remote
 
 import com.google.gson.Gson
 
-class ForecastRequest(private val zipCode: String) {
+class ForecastRequest(private val zipCode: Long) {
 
     private companion object {
         private val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"

@@ -17,7 +17,7 @@ class ForecastDataMapper {
 
     private fun convertForecastItemToDomain(
             forecast: com.sebaslogen.kotlinweatherapp.data.remote.Forecast) = with(forecast) {
-        ModelForecast(dt * 1000, weather[0].description, temp.max.toInt(), temp.min.toInt(),
+        ModelForecast(-1, dt * 1000, weather[0].description, temp.max.toInt(), temp.min.toInt(),
                 generateIconUrl(weather[0].icon))
     }
 

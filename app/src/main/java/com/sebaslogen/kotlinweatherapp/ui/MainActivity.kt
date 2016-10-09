@@ -9,7 +9,7 @@ import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,12 @@ class MainActivity : AppCompatActivity() {
         }, {
             val result = RequestForecastCommand(94043).execute()
             runOnUiThread {
-                forecastList.adapter = ForecastListAdapter(result) { toast(it.description) }
+                forecastList.adapter = ForecastListAdapter(result) {
+                    startActivity<DetailActivity>(
+                            DetailActivity.ID to it.id,
+                            DetailActivity.CITY_NAME to result.city)
+                }
+                title = "${result.city} (${result.country})"
             }
         })
     }

@@ -5,7 +5,7 @@ import com.sebaslogen.kotlinweatherapp.data.db.model.DayForecast
 import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
 import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 
-class DbDataMapper {
+class DbDataMapper { // TODO: This should convert from/to DB and generic data model
 
     fun convertFromDomain(forecast: ForecastList) = with(forecast) {
         val daily = dailyForecast.map { convertDayFromDomain(id, it) }

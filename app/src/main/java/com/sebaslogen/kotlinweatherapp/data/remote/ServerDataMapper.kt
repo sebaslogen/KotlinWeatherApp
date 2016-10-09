@@ -3,7 +3,7 @@ package com.sebaslogen.kotlinweatherapp.data.remote
 import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 import com.sebaslogen.kotlinweatherapp.domain.model.Forecast as ModelForecast
 
-class ServerDataMapper {
+class ServerDataMapper { // TODO: This should convert from/to sever and generic data model
 
     fun convertToDomain(zipCode: Long, forecast: ForecastResult) = with(forecast) {
         ForecastList(zipCode, city.name, city.country, convertForecastListToDomain(list))

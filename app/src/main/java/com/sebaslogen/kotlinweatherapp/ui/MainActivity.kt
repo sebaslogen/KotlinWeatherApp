@@ -4,18 +4,26 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ToolbarManager {
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
+
         forecastList.layoutManager = LinearLayoutManager(this)
+        attachToScroll(forecastList)
+
         loadData(forecastList)
     }
 
@@ -30,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                             DetailActivity.ID to it.id,
                             DetailActivity.CITY_NAME to result.city)
                 }
-                title = "${result.city} (${result.country})"
+                toolbarTitle = "${result.city} (${result.country})"
             }
         })
     }

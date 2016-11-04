@@ -2,6 +2,7 @@ package com.sebaslogen.kotlinweatherapp.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.widget.TextView
 import com.sebaslogen.kotlinweatherapp.R
@@ -14,9 +15,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.find
 import java.text.DateFormat
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), ToolbarManager {
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar)}
 
     companion object {
         val ID = "DetailActivity:id"
@@ -26,8 +29,10 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail)
+        initToolbar()
 
-        title = intent.getStringExtra(CITY_NAME)
+        toolbarTitle = intent.getStringExtra(CITY_NAME)
+        enableHomeAsUp { onBackPressed() }
 
         doAsync({
             Log.e(javaClass.simpleName, "Error loading Day forecast")

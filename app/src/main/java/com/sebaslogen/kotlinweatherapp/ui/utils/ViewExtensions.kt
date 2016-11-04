@@ -19,3 +19,11 @@ fun Long.toDateString(dateFormat: Int = DateFormat.MEDIUM): String {
     val df = DateFormat.getDateInstance(dateFormat, Locale.getDefault())
     return df.format(this)
 }
+
+fun View.slideExit() {
+    if (translationY == 0f) animate().translationY(-height.toFloat())
+}
+
+fun View.slideEnter() {
+    if (translationY < 0f) animate().translationY(0f)
+}

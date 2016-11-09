@@ -8,6 +8,7 @@ import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.ui.utils.ctx
 import com.sebaslogen.kotlinweatherapp.ui.utils.slideEnter
 import com.sebaslogen.kotlinweatherapp.ui.utils.slideExit
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 interface ToolbarManager {
@@ -24,7 +25,7 @@ interface ToolbarManager {
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.action_settings -> App.instance.toast("Settings")
+                R.id.action_settings -> toolbar.ctx.startActivity<SettingsActivity>()
                 else -> App.instance.toast("Unknown option")
             }
             true

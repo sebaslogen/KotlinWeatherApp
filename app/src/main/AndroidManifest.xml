@@ -26,6 +26,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:label="@string/settings"/>
     </application>
 
 </manifest>

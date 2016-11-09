@@ -20,10 +20,11 @@
         </activity>
         <activity
             android:name=".ui.activities.DetailActivity"
+            android:label="@string/settings"
             android:parentActivityName=".ui.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sebaslogen.kotlinweatherapp.ui.activities.MainActivity" />
+                android:value=".ui.activities.MainActivity" />
         </activity>
     </application>
 

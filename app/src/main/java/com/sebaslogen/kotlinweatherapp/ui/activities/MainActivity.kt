@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
     }
 
     private fun loadData(forecastList: RecyclerView) {
-        doAsync({
-            Log.e(javaClass.simpleName, "Error loading Forecast list")
+        doAsync({ throwable ->
+            Log.e(javaClass.simpleName, "Error loading Forecast list" + throwable)
         }, {
             val result = RequestForecastCommand(zipCode).execute()
             runOnUiThread {

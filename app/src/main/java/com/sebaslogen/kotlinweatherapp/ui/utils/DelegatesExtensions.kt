@@ -36,7 +36,7 @@ class Preference<T>(val context: Context, val name: String, val default: T) : Re
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <U> findPreference(name: String, default: U): U = with(prefs) {
+    private fun <T> findPreference(name: String, default: T): T = with(prefs) {
         val res: Any = when (default) {
             is Long -> getLong(name, default)
             is String -> getString(name, default)
@@ -46,10 +46,10 @@ class Preference<T>(val context: Context, val name: String, val default: T) : Re
             else -> throw IllegalArgumentException("This type can be saved into Preferences")
         }
 
-        res as U
+        res as T
     }
 
-    private fun <U> putPreference(name: String, value: U) = with(prefs.edit()) {
+    private fun <T> putPreference(name: String, value: T) = with(prefs.edit()) {
         when (value) {
             is Long -> putLong(name, value)
             is String -> putString(name, value)

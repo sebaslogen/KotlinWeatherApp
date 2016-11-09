@@ -1,4 +1,4 @@
-package com.sebaslogen.kotlinweatherapp.ui
+package com.sebaslogen.kotlinweatherapp.ui.activities
 
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.RecyclerView

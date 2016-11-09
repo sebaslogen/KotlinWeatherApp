@@ -1,4 +1,4 @@
-package com.sebaslogen.kotlinweatherapp.ui
+package com.sebaslogen.kotlinweatherapp.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
+import com.sebaslogen.kotlinweatherapp.ui.ForecastListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find

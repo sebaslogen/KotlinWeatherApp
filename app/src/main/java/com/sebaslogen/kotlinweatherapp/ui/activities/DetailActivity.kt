@@ -1,4 +1,4 @@
-package com.sebaslogen.kotlinweatherapp.ui
+package com.sebaslogen.kotlinweatherapp.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

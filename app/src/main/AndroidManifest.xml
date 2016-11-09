@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.DetailActivity"
-            android:parentActivityName=".ui.MainActivity" >
+            android:name=".ui.activities.DetailActivity"
+            android:parentActivityName=".ui.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sebaslogen.kotlinweatherapp.ui.MainActivity" />
+                android:value="com.sebaslogen.kotlinweatherapp.ui.activities.MainActivity" />
         </activity>
     </application>
 

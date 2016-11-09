@@ -30,7 +30,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
         val forecast = select(DayForecastTable.NAME).byId(id).
                 parseOpt { DayForecast(HashMap(it)) }
 
-        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
+        forecast?.let { dataMapper.convertDayToDomain(forecast) }
     }
 
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {

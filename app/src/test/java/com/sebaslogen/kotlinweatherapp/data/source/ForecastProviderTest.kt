@@ -1,8 +1,10 @@
 package com.sebaslogen.kotlinweatherapp.data.source
 
 import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
+import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 import org.junit.Assert.assertNotNull
 import org.junit.Test
+import org.mockito.Matchers.anyLong
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
@@ -18,5 +20,19 @@ class ForecastProviderTest {
         val provider = ForecastProvider(listOf(dataSource))
         // Then
         assertNotNull(provider.requestForecast(0))
+    }
+
+    @Test fun emptyDatabaseReturnsServerValue() {
+        // Given
+        val db = mock(ForecastDataSource::class.java)
+        val server = mock(ForecastDataSource::class.java)
+        `when`(server.requestForecastByZipCode(anyLong(), anyLong()))
+                .then {
+                    ForecastList(0, "city", "country", listOf())
+                }
+        // When
+        val provider = ForecastProvider(listOf(db, server))
+        // Then
+        assertNotNull(provider.requestByZipCode(0, 0))
     }
 }

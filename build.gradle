@@ -6,6 +6,7 @@ buildscript {
     ext.anko_version = '0.9'
     ext.gson_version = '2.7'
     ext.picasso_version = '2.5.2'
+    ext.junit_version = '4.12'
     repositories {
         jcenter()
     }

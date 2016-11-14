@@ -39,6 +39,7 @@ dependencies {
     compile "com.google.code.gson:gson:$gson_version"
     compile "com.squareup.picasso:picasso:$picasso_version"
     testCompile "junit:junit:$junit_version"
+    testCompile "org.mockito:mockito-core:$mockito_version"
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

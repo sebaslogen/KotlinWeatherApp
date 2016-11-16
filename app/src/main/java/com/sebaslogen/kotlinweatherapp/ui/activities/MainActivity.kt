@@ -13,6 +13,7 @@ import com.sebaslogen.kotlinweatherapp.ui.utils.DelegatesExt
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
+import org.jetbrains.anko.getStackTraceString
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), ToolbarManager {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
 
     private fun loadData(forecastList: RecyclerView) {
         doAsync({ throwable ->
-            Log.e(javaClass.simpleName, "Error loading Forecast list" + throwable)
+            Log.e(javaClass.simpleName, "Error loading Forecast list:\n" + throwable.getStackTraceString())
         }, {
             val result = RequestForecastCommand(zipCode).execute()
             runOnUiThread {

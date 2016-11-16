@@ -11,7 +11,7 @@ class ForecastServer(val dataMapper: ServerDataMapper = ServerDataMapper(),
         val result = ForecastByZipCodeRequest(zipCode).execute()
         val converted = dataMapper.convertToDomain(zipCode, result) // TODO: This should be converted to a generic DataModel without knowledge of the domain layer
         forecastDb.saveForecast(converted)
-        return forecastDb.requestForecastByZipCode(zipCode, date)
+        return converted
     }
 
     override fun requestDayForecast(id: Long): Forecast? {

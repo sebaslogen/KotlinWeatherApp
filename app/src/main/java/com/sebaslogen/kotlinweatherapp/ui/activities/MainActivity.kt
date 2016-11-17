@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
@@ -29,10 +30,25 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupTransitions()
         initToolbar()
 
         forecastList.layoutManager = LinearLayoutManager(this)
         attachToScroll(forecastList)
+    }
+
+    /**
+     * Draw shared element and other transitions only when this target view is ready to draw
+     */
+    private fun setupTransitions() {
+        supportPostponeEnterTransition()
+        forecastList.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                forecastList.viewTreeObserver.removeOnPreDrawListener(this)
+                supportStartPostponedEnterTransition()
+                return true
+            }
+        })
     }
 
     override fun onResume() {

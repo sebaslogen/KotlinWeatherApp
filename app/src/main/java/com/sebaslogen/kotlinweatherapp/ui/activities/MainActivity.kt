@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val transitionActivityOptions = ActivityOptions
                                 .makeSceneTransitionAnimation(this@MainActivity, imageView,
-                                        getString(R.string.transition_weather_day))
+                                        getString(R.string.transition_weather_day) + forecast.id)
                         val i = Intent(this@MainActivity, DetailActivity::class.java)
                         i.putExtra(DetailActivity.ID, forecast.id)
                         i.putExtra(DetailActivity.CITY_NAME, result.city)

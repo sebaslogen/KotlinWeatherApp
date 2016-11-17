@@ -1,5 +1,6 @@
 package com.sebaslogen.kotlinweatherapp.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -29,6 +30,10 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail)
+        val id = intent.getLongExtra(ID, -1)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            icon.transitionName = resources.getString(R.string.transition_weather_day) + id.toString()
+        }
         initToolbar()
 
         toolbarTitle = intent.getStringExtra(CITY_NAME)
@@ -37,7 +42,7 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
         doAsync({
             Log.e(javaClass.simpleName, "Error loading Day forecast")
         }, {
-            val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
+            val result = RequestDayForecastCommand(id).execute()
             runOnUiThread {
                 bindForecast(result)
             }

@@ -1,5 +1,6 @@
 package com.sebaslogen.kotlinweatherapp.ui
 
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,9 @@ class ForecastListAdapter(private val items: ForecastList,
         fun bindForecast(forecast: Forecast) {
             with(forecast) { // Analog to forecast.apply {  }
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.weatherIcon)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    itemView.weatherIcon.transitionName = itemView.ctx.resources.getString(R.string.transition_weather_day) + this.id.toString()
+                }
                 itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"

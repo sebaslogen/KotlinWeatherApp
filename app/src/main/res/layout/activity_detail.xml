@@ -22,6 +22,7 @@
             android:id="@+id/icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:transitionName="@string/transition_weather_day"
             tools:src="@mipmap/ic_launcher"
             tools:ignore="ContentDescription"/>
 

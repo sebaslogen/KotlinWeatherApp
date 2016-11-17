@@ -12,6 +12,7 @@
         android:id="@+id/weatherIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:transitionName="@string/transition_weather_day"
         tools:src="@mipmap/ic_launcher" />
 
     <LinearLayout

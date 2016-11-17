@@ -1,23 +1,28 @@
 package com.sebaslogen.kotlinweatherapp.ui.activities
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
+import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
 import com.sebaslogen.kotlinweatherapp.ui.ForecastListAdapter
 import com.sebaslogen.kotlinweatherapp.ui.utils.DelegatesExt
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.getStackTraceString
-import org.jetbrains.anko.startActivity
+
 
 class MainActivity : AppCompatActivity(), ToolbarManager {
-    override val toolbar by lazy { find<Toolbar>(R.id.toolbar)}
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     val zipCode: Long by DelegatesExt.preference(this, SettingsActivity.ZIP_CODE,
             SettingsActivity.DEFAULT_ZIP)
 
@@ -41,10 +46,17 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
         }, {
             val result = RequestForecastCommand(zipCode).execute()
             runOnUiThread {
-                forecastList.adapter = ForecastListAdapter(result) {
-                    startActivity<DetailActivity>(
-                            DetailActivity.ID to it.id,
-                            DetailActivity.CITY_NAME to result.city)
+                forecastList.adapter = ForecastListAdapter(result)
+                { forecast: Forecast, imageView: ImageView ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        val transitionActivityOptions = ActivityOptions
+                                .makeSceneTransitionAnimation(this@MainActivity, imageView,
+                                        getString(R.string.transition_weather_day))
+                        val i = Intent(this@MainActivity, DetailActivity::class.java)
+                        i.putExtra(DetailActivity.ID, forecast.id)
+                        i.putExtra(DetailActivity.CITY_NAME, result.city)
+                        startActivity(i, transitionActivityOptions.toBundle())
+                    }
                 }
                 toolbarTitle = "${result.city} (${result.country})"
             }

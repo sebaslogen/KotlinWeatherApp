@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
 import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
@@ -13,7 +14,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 
 class ForecastListAdapter(private val items: ForecastList,
-                          private val itemClick: (Forecast) -> Unit) :
+                          private val itemClick: (Forecast, ImageView) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +28,8 @@ class ForecastListAdapter(private val items: ForecastList,
 
     override fun getItemCount() = items.size()
 
-    class ViewHolder(view: View, private val itemClick: (Forecast) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val itemClick: (Forecast, ImageView) -> Unit) :
+            RecyclerView.ViewHolder(view) {
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) { // Analog to forecast.apply {  }
@@ -36,7 +38,7 @@ class ForecastListAdapter(private val items: ForecastList,
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
-                itemView.setOnClickListener { itemClick(this) }
+                itemView.setOnClickListener { itemClick(this, itemView.weatherIcon) }
             }
         }
     }

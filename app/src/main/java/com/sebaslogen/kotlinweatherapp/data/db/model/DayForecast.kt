@@ -1,8 +1,12 @@
 package com.sebaslogen.kotlinweatherapp.data.db.model
 
+import io.objectbox.annotation.Entity
+import io.objectbox.annotation.Id
 import java.util.*
 
+@Entity
 class DayForecast(var map: MutableMap<String, Any?>) {
+    @Id
     var _id: Long by map
     var date: Long by map
     var description: String by map

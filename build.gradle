@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.0.6'
-    ext.support_version = '25.0.1'
+    ext.support_version = '25.2.0'
     ext.anko_version = '0.9'
     ext.gson_version = '2.7'
     ext.picasso_version = '2.5.2'
@@ -10,12 +10,18 @@ buildscript {
     ext.mockito_version = '2.2.16'
     ext.test_runner_version = '0.5'
     ext.espresso_version = '2.2.2'
+    ext.objectbox_version = '0.9.8'
     repositories {
         jcenter()
+        maven {
+            url "http://objectbox.net/beta-repo/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath "io.objectbox:objectbox-gradle-plugin:$objectbox_version"
     }
 }
 

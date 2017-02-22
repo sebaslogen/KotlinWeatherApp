@@ -1,23 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.objectbox'
 
-buildscript {
-    repositories {
-        jcenter()
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "http://objectbox.net/beta-repo/"
     }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-    }
+}
+dependencies {
+    compile "io.objectbox:objectbox-android:$objectbox_version"
 }
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.sebaslogen.kotlinweatherapp"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -38,6 +41,8 @@ dependencies {
     compile "org.jetbrains.anko:anko-sqlite:$anko_version"
     compile "com.google.code.gson:gson:$gson_version"
     compile "com.squareup.picasso:picasso:$picasso_version"
+    compile "io.objectbox:objectbox-android:$objectbox_version"
+    compile "io.objectbox:objectbox-rxjava:$objectbox_version"
     testCompile "junit:junit:$junit_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
     androidTestCompile "com.android.support:appcompat-v7:$support_version"

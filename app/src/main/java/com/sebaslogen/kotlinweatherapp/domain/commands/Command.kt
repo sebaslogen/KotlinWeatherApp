@@ -1,5 +1,5 @@
 package com.sebaslogen.kotlinweatherapp.domain.commands
 
-interface Command<T> {
+interface Command<out T> {
     fun execute(): T
 }

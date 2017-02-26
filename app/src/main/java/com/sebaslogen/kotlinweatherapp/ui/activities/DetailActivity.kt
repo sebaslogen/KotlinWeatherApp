@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.widget.TextView
 import com.sebaslogen.kotlinweatherapp.R
-import com.sebaslogen.kotlinweatherapp.domain.commands.RequestDayForecastCommand
 import com.sebaslogen.kotlinweatherapp.data.model.Forecast
+import com.sebaslogen.kotlinweatherapp.domain.commands.RequestDayForecastCommand
 import com.sebaslogen.kotlinweatherapp.ui.utils.color
 import com.sebaslogen.kotlinweatherapp.ui.utils.textColor
 import com.sebaslogen.kotlinweatherapp.ui.utils.toDateString
@@ -28,7 +28,7 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         val id = intent.getLongExtra(ID, -1)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -9,6 +9,9 @@
 .externalNativeBuild
 .classpath
 .idea/*
+/.idea/*
+.idea/misc.xml
+/.idea/misc.xml
 !.idea/codeStyleSettings.xml
 !.idea/inspectionProfiles/
 *.iml

@@ -46,8 +46,8 @@ before_script:
   - adb shell settings put global animator_duration_scale 0
   - adb shell input keyevent 82 &
 script:
-  - set -e && ./gradlew check connectedCheck -PdisablePreDex 2>/dev/null 
-  - set +e
+  - set +e && ./gradlew check connectedCheck -PdisablePreDex 2>/dev/null 
+  - set -e
   - ./gradlew check connectedCheck -PdisablePreDex
 after_script:
   - echo "Travis TRAVIS_BUILD_DIR:"${TRAVIS_BUILD_DIR}

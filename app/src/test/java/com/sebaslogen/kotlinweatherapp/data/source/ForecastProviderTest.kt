@@ -1,7 +1,7 @@
 package com.sebaslogen.kotlinweatherapp.data.source
 
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.mockito.ArgumentMatchers

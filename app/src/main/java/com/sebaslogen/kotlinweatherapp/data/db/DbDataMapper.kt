@@ -2,26 +2,26 @@ package com.sebaslogen.kotlinweatherapp.data.db
 
 import com.sebaslogen.kotlinweatherapp.data.db.model.CityForecast
 import com.sebaslogen.kotlinweatherapp.data.db.model.DayForecast
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 
-class DbDataMapper { // TODO: This should convert from/to DB and generic data model
+class DbDataMapper {
 
-    fun convertFromDomain(forecast: ForecastList) = with(forecast) {
-        val daily = dailyForecast.map { convertDayFromDomain(id, it) }
+    fun convertFromModel(forecast: ForecastList) = with(forecast) {
+        val daily = dailyForecast.map { convertDayFromModel(id, it) }
         CityForecast(id, city, country, daily)
     }
 
-    private fun convertDayFromDomain(cityId: Long, forecast: Forecast) = with(forecast) {
+    private fun convertDayFromModel(cityId: Long, forecast: Forecast) = with(forecast) {
         DayForecast(date, description, high, low, iconUrl, cityId)
     }
 
-    fun convertToDomain(forecast: CityForecast) = with(forecast) {
-        val daily = dailyForecast.map { convertDayToDomain(it) }
+    fun convertToModel(forecast: CityForecast) = with(forecast) {
+        val daily = dailyForecast.map { convertDayToModel(it) }
         ForecastList(_id, city, country, daily)
     }
 
-    fun convertDayToDomain(dayForecast: DayForecast) = with(dayForecast) {
+    fun convertDayToModel(dayForecast: DayForecast) = with(dayForecast) {
         Forecast(_id, date, description, high, low, iconUrl)
     }
 }

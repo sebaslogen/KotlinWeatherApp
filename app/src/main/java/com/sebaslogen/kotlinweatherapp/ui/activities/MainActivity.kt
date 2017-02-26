@@ -13,7 +13,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
 import com.sebaslogen.kotlinweatherapp.ui.ForecastListAdapter
 import com.sebaslogen.kotlinweatherapp.ui.utils.DelegatesExt
 import kotlinx.android.synthetic.main.activity_main.*

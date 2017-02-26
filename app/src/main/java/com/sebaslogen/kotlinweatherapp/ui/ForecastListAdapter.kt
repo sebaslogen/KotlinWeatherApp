@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 import com.sebaslogen.kotlinweatherapp.ui.utils.ctx
 import com.sebaslogen.kotlinweatherapp.ui.utils.toDateString
 import com.squareup.picasso.Picasso

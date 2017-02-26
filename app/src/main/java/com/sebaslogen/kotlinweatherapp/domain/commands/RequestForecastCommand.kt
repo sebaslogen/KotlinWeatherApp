@@ -1,7 +1,7 @@
 package com.sebaslogen.kotlinweatherapp.domain.commands
 
 import com.sebaslogen.kotlinweatherapp.data.source.ForecastProvider
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 
 class RequestForecastCommand( private val zipCode: Long,
         val forecastProvider: ForecastProvider = ForecastProvider()) : Command<ForecastList> {

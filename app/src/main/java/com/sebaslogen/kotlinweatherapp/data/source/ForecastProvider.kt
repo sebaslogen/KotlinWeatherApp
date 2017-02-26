@@ -3,8 +3,8 @@ package com.sebaslogen.kotlinweatherapp.data.source
 import com.sebaslogen.kotlinweatherapp.data.db.ForecastDb
 import com.sebaslogen.kotlinweatherapp.data.firstResult
 import com.sebaslogen.kotlinweatherapp.data.remote.ForecastServer
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 
 class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.SOURCES) {
 

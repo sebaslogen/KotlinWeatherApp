@@ -1,4 +1,4 @@
-package com.sebaslogen.kotlinweatherapp.domain.model
+package com.sebaslogen.kotlinweatherapp.data.model
 
 data class ForecastList(val id: Long, val city: String, val country: String, val dailyForecast: List<Forecast>) {
     operator fun get(position: Int) = dailyForecast[position]

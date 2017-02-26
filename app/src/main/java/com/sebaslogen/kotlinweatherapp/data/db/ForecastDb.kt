@@ -4,7 +4,7 @@ import com.sebaslogen.kotlinweatherapp.data.db.model.CityForecast
 import com.sebaslogen.kotlinweatherapp.data.db.model.DayForecast
 import com.sebaslogen.kotlinweatherapp.data.source.ForecastDataSource
 import com.sebaslogen.kotlinweatherapp.data.toVarargArray
-import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import java.util.*
@@ -23,14 +23,14 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
                 .whereSimple("${CityForecastTable.ID} = ?", zipCode.toString())
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
-        city?.let { dataMapper.convertToDomain(city) }
+        city?.let { dataMapper.convertToModel(city) }
     }
 
     override fun requestDayForecast(id: Long) = forecastDbHelper.use {
         val forecast = select(DayForecastTable.NAME).byId(id).
                 parseOpt { DayForecast(HashMap(it)) }
 
-        forecast?.let { dataMapper.convertDayToDomain(forecast) }
+        forecast?.let { dataMapper.convertDayToModel(forecast) }
     }
 
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {
@@ -38,7 +38,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
         clear(CityForecastTable.NAME)
         clear(DayForecastTable.NAME)
 
-        with(dataMapper.convertFromDomain(forecast)) {
+        with(dataMapper.convertFromModel(forecast)) {
             insert(CityForecastTable.NAME, *map.toVarargArray())
             dailyForecast.forEach { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
         }

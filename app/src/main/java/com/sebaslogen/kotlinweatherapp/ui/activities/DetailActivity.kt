@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.TextView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.domain.commands.RequestDayForecastCommand
-import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.model.Forecast
 import com.sebaslogen.kotlinweatherapp.ui.utils.color
 import com.sebaslogen.kotlinweatherapp.ui.utils.textColor
 import com.sebaslogen.kotlinweatherapp.ui.utils.toDateString

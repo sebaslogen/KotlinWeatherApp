@@ -3,6 +3,8 @@
 # KotlinWeatherApp
 Sample Android project of a Weather app implemented purely in Kotlin.
 
+The app connects to an internet API to retrieve weather forecasts for the next week. The data is also stored locally in a database cache.
+
 Running the project and the tests
 =============
 Open the project in Android Studio and select the gradle task '**installDebug**' or simply press the Run button.

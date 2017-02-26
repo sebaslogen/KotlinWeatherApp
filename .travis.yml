@@ -1,6 +1,6 @@
 language: android
 # Use the Travis Container-Based Infrastructure
-sudo: false
+sudo: required
 jdk:
   - oraclejdk8
 cache:
@@ -10,6 +10,9 @@ env:
   global:
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
     - ADB_INSTALL_TIMEOUT=8
+before_install:
+  - sudo mkdir "$ANDROID_SDK/licenses" || true
+  - sudo echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_SDK/licenses/android-sdk-license"
 android:
   components:
     # Latest revision of Android SDK Tools
@@ -18,6 +21,7 @@ android:
     - platform-tools
 
     # The BuildTools version used by your project
+    - build-tools-24.0.1
     - build-tools-25.2.0
 
     # The SDK version used to compile your project

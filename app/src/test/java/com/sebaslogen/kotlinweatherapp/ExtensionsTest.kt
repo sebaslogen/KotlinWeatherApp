@@ -4,14 +4,15 @@ import com.sebaslogen.kotlinweatherapp.ui.utils.toDateString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.DateFormat
+import java.util.*
 
 class ExtensionsTest {
 
     @Test fun testLongToDateString() {
-        assertEquals("19-oct-2015", 1445275635000L.toDateString())
+        assertEquals("Oct 19, 2015", 1445275635000L.toDateString(locale = Locale.ENGLISH))
     }
 
     @Test fun testDateStringFullFormat() {
-        assertEquals("lunes 19 de octubre de 2015", 1445275635000L.toDateString(DateFormat.FULL))
+        assertEquals("Monday, October 19, 2015", 1445275635000L.toDateString(DateFormat.FULL, Locale.ENGLISH))
     }
 }

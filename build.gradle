@@ -3,7 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.0.6'
     ext.support_version = '25.2.0'
-    ext.anko_version = '0.9'
+    ext.anko_version = '0.9.1'
     ext.gson_version = '2.7'
     ext.picasso_version = '2.5.2'
     ext.junit_version = '4.12'

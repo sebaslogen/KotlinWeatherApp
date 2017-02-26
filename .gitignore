@@ -7,5 +7,12 @@
 /build
 /captures
 .externalNativeBuild
-/.idea/misc.xml
-.idea/misc.xml
+.classpath
+.idea/*
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles/
+*.iml
+.settings/
+.project
+local.properties
+.gradletasknamecache

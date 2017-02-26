@@ -21,9 +21,15 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
         return if (res != null && res.size() >= days) res else null
     }
 
-    private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T = sources.firstResult { f(it) }
+    private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T = sources.firstResult({ f(it) }, { storeInDb(it) })
 
     private fun todayTimeSpan() = System.currentTimeMillis() / DAY_IN_MILLIS * DAY_IN_MILLIS
 
     fun requestForecast(id: Long): Forecast = requestToSources { it.requestDayForecast(id) }
+
+    fun <T : Any> storeInDb(result: T) {
+        sources.asSequence()
+                .mapNotNull { if (it is ForecastDb && result is ForecastList) it else null }
+                .forEach { it.saveForecast(result as ForecastList) }
+    }
 }

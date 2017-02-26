@@ -1,4 +1,4 @@
-package com.sebaslogen.kotlinweatherapp.data.remote
+package com.sebaslogen.kotlinweatherapp.data.remote.model
 
 data class ForecastResult(val city: City, val list: List<Forecast>)
 data class City(val id: Long, val name: String, val coord: Coordinates, val country: String,

@@ -1,6 +1,7 @@
 package com.sebaslogen.kotlinweatherapp.data.remote
 
 import com.google.gson.Gson
+import com.sebaslogen.kotlinweatherapp.data.remote.model.ForecastResult
 import java.net.URL
 
 class ForecastByZipCodeRequest(val zipCode: Long, val gson: Gson = Gson()) {

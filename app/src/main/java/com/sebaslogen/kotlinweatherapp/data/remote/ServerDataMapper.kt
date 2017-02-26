@@ -1,5 +1,7 @@
 package com.sebaslogen.kotlinweatherapp.data.remote
 
+import com.sebaslogen.kotlinweatherapp.data.remote.model.Forecast
+import com.sebaslogen.kotlinweatherapp.data.remote.model.ForecastResult
 import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 import com.sebaslogen.kotlinweatherapp.domain.model.Forecast as ModelForecast
 

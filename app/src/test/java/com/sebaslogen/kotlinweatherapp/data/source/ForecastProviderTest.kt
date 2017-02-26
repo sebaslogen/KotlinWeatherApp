@@ -4,7 +4,7 @@ import com.sebaslogen.kotlinweatherapp.domain.model.Forecast
 import com.sebaslogen.kotlinweatherapp.domain.model.ForecastList
 import org.junit.Assert.assertNotNull
 import org.junit.Test
-import org.mockito.Matchers.anyLong
+import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
@@ -26,7 +26,7 @@ class ForecastProviderTest {
         // Given
         val db = mock(ForecastDataSource::class.java)
         val server = mock(ForecastDataSource::class.java)
-        `when`(server.requestForecastByZipCode(anyLong(), anyLong()))
+        `when`(server.requestForecastByZipCode(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong()))
                 .then {
                     ForecastList(0, "city", "country", listOf())
                 }

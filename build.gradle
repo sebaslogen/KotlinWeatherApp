@@ -1,7 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
+    }
+}
+
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.0-rc-91'
+    ext.kotlin_coroutines_version = '0.11-rc'
     ext.support_version = '25.2.0'
     ext.anko_version = '0.9.1'
     ext.gson_version = '2.7'
@@ -12,16 +21,12 @@ buildscript {
     ext.espresso_version = '2.2.2'
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
     }
 }
 

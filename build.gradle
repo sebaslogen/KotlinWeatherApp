@@ -9,7 +9,7 @@ allprojects {
 }
 
 buildscript {
-    ext.kotlin_version = '1.1.0-rc-91'
+    ext.kotlin_version = '1.1.0'
     ext.kotlin_coroutines_version = '0.11-rc'
     ext.support_version = '25.2.0'
     ext.anko_version = '0.9.1'
@@ -25,7 +25,7 @@ buildscript {
         maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

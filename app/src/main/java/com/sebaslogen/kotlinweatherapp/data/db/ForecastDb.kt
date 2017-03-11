@@ -2,9 +2,9 @@ package com.sebaslogen.kotlinweatherapp.data.db
 
 import com.sebaslogen.kotlinweatherapp.data.db.model.CityForecast
 import com.sebaslogen.kotlinweatherapp.data.db.model.DayForecast
+import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 import com.sebaslogen.kotlinweatherapp.data.source.ForecastDataSource
 import com.sebaslogen.kotlinweatherapp.data.toVarargArray
-import com.sebaslogen.kotlinweatherapp.data.model.ForecastList
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import java.util.*
@@ -33,14 +33,19 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
         forecast?.let { dataMapper.convertDayToModel(forecast) }
     }
 
-    fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {
+    fun saveForecastList(forecast: ForecastList): ForecastList {
+        var ids: List<Long> = emptyList()
+        forecastDbHelper.use {
+            clear(CityForecastTable.NAME)
+            clear(DayForecastTable.NAME)
 
-        clear(CityForecastTable.NAME)
-        clear(DayForecastTable.NAME)
-
-        with(dataMapper.convertFromModel(forecast)) {
-            insert(CityForecastTable.NAME, *map.toVarargArray())
-            dailyForecast.forEach { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
+            with(dataMapper.convertFromModel(forecast)) {
+                insert(CityForecastTable.NAME, *map.toVarargArray())
+                ids = dailyForecast.map { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
+            }
         }
+        if (forecast is ForecastList) return forecast.copy(dailyForecast = forecast.dailyForecast
+                .mapIndexed { index, forecast -> forecast.copy(id = ids[index]) })
+        return forecast
     }
 }

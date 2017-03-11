@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.widget.TextView
 import com.sebaslogen.kotlinweatherapp.R
 import com.sebaslogen.kotlinweatherapp.data.model.Forecast
@@ -14,13 +13,17 @@ import com.sebaslogen.kotlinweatherapp.ui.utils.textColor
 import com.sebaslogen.kotlinweatherapp.ui.utils.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import org.jetbrains.anko.ctx
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import java.text.DateFormat
 
 class DetailActivity : AppCompatActivity(), ToolbarManager {
     override val toolbar by lazy { find<Toolbar>(R.id.toolbar)}
+    var loadingJob: Job? = null
 
     companion object {
         val ID = "DetailActivity:id"
@@ -38,15 +41,25 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
 
         toolbarTitle = intent.getStringExtra(CITY_NAME)
         enableHomeAsUp { onBackPressed() }
+    }
 
-        doAsync({
-            Log.e(javaClass.simpleName, "Error loading Day forecast")
-        }, {
+    override fun onResume() {
+        super.onResume()
+        loadData(intent.getLongExtra(ID, -1))
+    }
+
+    override fun onPause() {
+        loadingJob?.cancel()
+        super.onPause()
+    }
+
+    private fun loadData(id: Long) = runBlocking {
+        loadingJob = launch(CommonPool) {
             val result = RequestDayForecastCommand(id).execute()
             runOnUiThread {
                 bindForecast(result)
             }
-        })
+        }
     }
 
     private fun bindForecast(forecast: Forecast) = with(forecast) {

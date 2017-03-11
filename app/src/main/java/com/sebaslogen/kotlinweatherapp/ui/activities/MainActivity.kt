@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import com.sebaslogen.kotlinweatherapp.R
@@ -17,15 +16,18 @@ import com.sebaslogen.kotlinweatherapp.domain.commands.RequestForecastCommand
 import com.sebaslogen.kotlinweatherapp.ui.ForecastListAdapter
 import com.sebaslogen.kotlinweatherapp.ui.utils.DelegatesExt
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import org.jetbrains.anko.find
-import org.jetbrains.anko.getStackTraceString
 
 
 class MainActivity : AppCompatActivity(), ToolbarManager {
     override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     val zipCode: Long by DelegatesExt.preference(this, SettingsActivity.ZIP_CODE,
             SettingsActivity.DEFAULT_ZIP)
+    var loadingJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +58,13 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
         loadData(forecastList)
     }
 
-    private fun loadData(forecastList: RecyclerView) {
-        doAsync({ throwable ->
-            Log.e(javaClass.simpleName, "Error loading Forecast list:\n" + throwable.getStackTraceString())
-        }, {
+    override fun onPause() {
+        loadingJob?.cancel()
+        super.onPause()
+    }
+
+    private fun loadData(forecastList: RecyclerView) = runBlocking {
+        loadingJob = launch(CommonPool) {
             val result = RequestForecastCommand(zipCode).execute()
             runOnUiThread {
                 forecastList.adapter = ForecastListAdapter(result)
@@ -76,6 +81,6 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
                 }
                 toolbarTitle = "${result.city} (${result.country})"
             }
-        })
+        }
     }
 }

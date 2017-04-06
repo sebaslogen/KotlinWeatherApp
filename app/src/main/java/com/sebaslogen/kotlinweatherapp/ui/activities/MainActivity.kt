@@ -17,6 +17,7 @@ import com.sebaslogen.kotlinweatherapp.ui.utils.DelegatesExt
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import org.jetbrains.anko.find
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
     private fun loadData(forecastList: RecyclerView) = runBlocking {
         loadingJob = launch(CommonPool) {
             val result = RequestForecastCommand(zipCode).execute()
-            runOnUiThread {
+            launch(UI) {
                 forecastList.adapter = ForecastListAdapter(result)
                 { (id), imageView: ImageView ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

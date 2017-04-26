@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
         super.onPause()
     }
 
-    private fun loadData(forecastList: RecyclerView) = runBlocking {
+    private fun loadData(forecastList: RecyclerView) {
         loadingJob = launch(CommonPool) {
             val result = RequestForecastCommand(zipCode).execute()
             launch(UI) {

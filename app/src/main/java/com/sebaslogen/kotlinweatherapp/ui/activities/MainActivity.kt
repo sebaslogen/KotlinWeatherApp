@@ -19,14 +19,12 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 import org.jetbrains.anko.find
-
 
 class MainActivity : AppCompatActivity(), ToolbarManager {
     override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     val zipCode: Long by DelegatesExt.preference(this, SettingsActivity.ZIP_CODE,
-        SettingsActivity.DEFAULT_ZIP)
+            SettingsActivity.DEFAULT_ZIP)
     var loadingJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,8 +69,8 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
                 { (id), imageView: ImageView ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val transitionActivityOptions = ActivityOptions
-                            .makeSceneTransitionAnimation(this@MainActivity, imageView,
-                                getString(R.string.transition_weather_day) + id)
+                                .makeSceneTransitionAnimation(this@MainActivity, imageView,
+                                        getString(R.string.transition_weather_day) + id)
                         val i = Intent(this@MainActivity, DetailActivity::class.java)
                         i.putExtra(DetailActivity.ID, id)
                         i.putExtra(DetailActivity.CITY_NAME, result.city)

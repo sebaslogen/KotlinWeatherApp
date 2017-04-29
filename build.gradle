@@ -10,17 +10,17 @@ allprojects {
 
 buildscript {
     ext.gradle_plugin_version = '2.3.1'
-    ext.kotlin_version = '1.1.1'
+    ext.kotlin_version = '1.1.2'
     ext.kotlin_coroutines_version = '0.14'
     ext.support_version = '25.3.1'
     ext.anko_version = '0.9.1'
-    ext.gson_version = '2.7'
+    ext.gson_version = '2.8.0'
     ext.picasso_version = '2.5.2'
     ext.junit_version = '4.12'
     ext.mockito_version = '2.2.16'
     ext.test_runner_version = '0.5'
     ext.espresso_version = '2.2.2'
-    ext.klint_version = '1.0.1'
+    ext.ktlint_version = '1.0.2'
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
@@ -30,7 +30,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:$klint_version"
+        classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:$ktlint_version"
     }
 }
 
